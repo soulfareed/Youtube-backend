@@ -4,22 +4,16 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/index.js"
   },
   "keywords": [
     "backend",
     "javascript"
   ],
-  "author": "fareed",
+  "author": "mdfareed",
   "license": "ISC",
   "description": "",
-  "devDependencies": {
-    "nodemon": "^3.1.7",
-    "prettier": "^3.3.3"
-  },
   "dependencies": {
-    "dotenv": "^16.4.5",
-    "express": "^4.21.1",
-    "mongoose": "^8.8.0"
+    "dotenv": "^16.4.5"
   }
 }
