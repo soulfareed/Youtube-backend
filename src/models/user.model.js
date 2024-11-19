@@ -22,6 +22,25 @@ const userSchema = new Schema(
             required: true,
             trim: true,
             index: true
+        },
+        avatar:{
+            type: String,  //cloudinary url going to use
+            required: true,
+            
+        },
+        coverImage: {
+            type : String, 
+
+        },
+        WatchHistory: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Video"
+            }
+        ],
+        password: {
+            type: String,
+            
         }
 }
 )
