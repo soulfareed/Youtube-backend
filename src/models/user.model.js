@@ -19,7 +19,7 @@ const userSchema = new Schema(
             unique: true,
             true: true
         },
-        fullname:{
+        fullName:{
             type: String,
             required: true,
             trim: true,
@@ -52,11 +52,37 @@ const userSchema = new Schema(
     {timestamps: true}
 )
 
+// PASSWORD ENCRYPTION
 
 userSchema.pre("save", async function (next) {
-    if(!this.isModified("password")) return next()
+    if(!this.isModified("password")) return next();
     this.password = bcrypt.hash(this.password, 10)
     next()
 })
+
+userSchema.methods.isPasswordCorrect = async function (password){
+  return await bcrypt.compare(password, this.password)
+}
+
+userSchema.methods.generateAccessToken = function(){
+    jsonwebtoken.sign({
+        _id: this._id,
+        email: this.email,
+        username: this.username,
+        fullName: this.fullName
+    },
+process.env.ACCES_TOKEN_SECRET,{
+    expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+})
+}
+userSchema.methods.generateRefreshToken = function(){
+    jsonwebtoken.sign({
+        _id: this._id,   
+    },
+process.env.REFRESH_TOKEN_SECRET,{
+    expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+})
+}
+
 
 export const User = mongoose.model("User",userSchema)
