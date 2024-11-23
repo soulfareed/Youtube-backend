@@ -76,13 +76,13 @@ process.env.ACCES_TOKEN_SECRET,{
 })
 }
 userSchema.methods.generateRefreshToken = function(){
-//     jsonwebtoken.sign({
-//         _id: this._id,   
-//     },
-// process.env.REFRESH_TOKEN_SECRET,{
-//     expiresIn: process.env.REFRESH_TOKEN_EXPIRY
-// })
-// }
+    jsonwebtoken.sign({
+        _id: this._id,   
+    },
+process.env.REFRESH_TOKEN_SECRET,{
+    expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+})
+}
 
 
 export const User = mongoose.model("User",userSchema)
