@@ -16,6 +16,8 @@ const registerUser = asyncHandler(async (req, res) => {
   // return res
 
   const { fullName, email, password, username } = req.body;
+  // console.log(body);
+
   console.log("email :", email, "password :", password);
 
   if (
@@ -30,6 +32,8 @@ const registerUser = asyncHandler(async (req, res) => {
   if (existedUser) {
     throw new ApiError(409, "User with email or username already existed");
   }
+
+  console.log(req.files);
 
   const avatarLocalPath = req.files?.avatar[0]?.path;
   const coverImageLocalPath = req.files?.coverImage[0]?.path;
